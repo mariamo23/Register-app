@@ -1,4 +1,4 @@
-# Register-app
+# DevOps-Project-with-Jenkins-Maven-SonaQube-Docker-and-EKS
 This is a simple ci cd project that deploys to kubernetes using jenkins
 
 ## Here is the project work flow of how I will build the app
@@ -58,7 +58,7 @@ sudo chmod 777 Jenkins.sh # this will give Jenkins.sh executable permission
 
 ![Screenshot 2024-02-22 154531](https://github.com/mariamo23/Register-app/assets/124802455/4d3a0100-3c27-4ab6-b108-078f5f3f9769)
 
-## Step 3: Connect to your console and create a shell script to install Java
+## Step 5: Connect to your console and install Java
 
 ```
 sudo apt update
@@ -68,16 +68,42 @@ sudo init 6 # reboot the system
 ### Install Java
 
 ```
-vi java.sh
-```
-
-```
-#!/bin/bash
 sudo apt install fontconfig openjdk-17-jre -y # install Java 17
 java -version  # check Java version
 ```
 
+## Step 6: Install Docker on Jenkins-Agent
+
 ```
-sudo chmod 777 java.sh # this will give java.sh executable permission
-./java.sh    # this will installl java
+sudo apt-get install docker.io -y
+sudo usermod -aG docker $USER
+sudo init 6
 ```
+
+## Step 7: Edit ssh config file on both Jenkins Master and Agent
+
+```
+sudo vi /etc/ssh/sshd_config
+sudo service sshd reload  # reload the sshd service
+```
+Uncomment and make `PubkeyAuthentication` yes and uncomment `AuthorizedKeysFile`
+
+## Step 8: Genenrate SSH key on the master server
+
+```
+ssh-keygen
+```
+
+```
+cat .ssh/id_rsa.pub
+```
+copy the key and go to the agent server and run the following:
+
+```
+vi .ssh/authorized_keys
+```
+Paste the copied key here and save the file
+
+## Step 9:
+
+Copy the public IP of Jenkins-Master
