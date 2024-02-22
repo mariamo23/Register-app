@@ -97,7 +97,7 @@ ssh-keygen
 ```
 cat .ssh/id_rsa.pub
 ```
-copy the key and go to the agent server and run the following:
+copy the key and go to Jenkins-Agent and run the following:
 
 ```
 vi .ssh/authorized_keys
