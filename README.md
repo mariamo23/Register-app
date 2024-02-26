@@ -119,7 +119,7 @@ Select Username with password
 
 Username: Github username
 
-Password: Token generated from github ( Settings --> Develpers settings --> Personal access token --> Token (classic) --> Generate new token )
+Password: Token generated from github ( Settings --> Develpers settings --> Personal access token --> Token(classic) --> Generate new token )
 
 ID and description: github
 
