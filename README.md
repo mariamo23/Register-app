@@ -125,6 +125,25 @@ ID and description: github
 
 Then click create
 
+## Step 7: Create a sonarqube container (Remember to add 9000 ports in the security group).
+
+'''
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+'''
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/4ead278a-03cb-4557-8bcc-7df3f32f5b21)
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/84394744-ea08-4cbc-a074-ab8b08ab0440)
+
+Enter username: admin and password: admin, click on login and change password
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/25196ad5-f29a-4edb-9331-04c3e1659300)
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/7c3b84f6-8362-4a61-a507-f3b9303ac5ea)
+
+
+
+
 
 
 
