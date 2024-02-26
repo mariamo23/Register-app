@@ -91,30 +91,41 @@ sudo chmod 777 Docker.sh # this will give Docker.sh executable permission
 ./Docker.sh    
 ```
 
-## Step 7: Edit ssh config file on both Jenkins Master and Agent
+## Step 6: Install plugins like Maven, JDK
 
-```
-sudo vi /etc/ssh/sshd_config
-sudo service sshd reload  # reload the sshd service
-```
-Uncomment and make `PubkeyAuthentication` yes and uncomment `AuthorizedKeysFile`
+Go to Manage Jenkins, plugins, available plugins. Select Maven integration, Pipleline maven integration and Eclipse Temurin Installer Plugin to install JDK.
 
-## Step 8: Genenrate SSH key on the master server
+![Screenshot 2024-02-26 162615](https://github.com/mariamo23/Register-app/assets/124802455/7c153e41-fb45-4c57-995e-6c654ebeb14f)
+![Screenshot 2024-02-26 162926](https://github.com/mariamo23/Register-app/assets/124802455/98739ed1-5692-4e22-af1c-f421140fdf5a)
 
-```
-ssh-keygen
-```
+Go to Manage Jenkins, Tools, maven installation and name it and select install authomatically. Also, go to JDK installation and give it a name and select install authomatically. Click add installer and select install from adoptium.net. Select JDK-17.05+8. Apply and Save
 
-```
-cat .ssh/id_rsa.pub
-```
-copy the key and go to Jenkins-Agent and run the following:
+![Screenshot 2024-02-26 163643](https://github.com/mariamo23/Register-app/assets/124802455/9f3bfd63-e756-4bf5-bfd8-bf502af5a7e6)
 
-```
-vi .ssh/authorized_keys
-```
-Paste the copied key here and save the file
+![image](https://github.com/mariamo23/Register-app/assets/124802455/d9d16313-b898-478e-be5c-c18568937870)
 
-## Step 9:
 
-Copy the public IP of Jenkins-Master
+
+## Step 7: Github integration with Jenkins
+
+Add github credentials to Jenkins. Go to Manage Jenkins --> Credentials --> under stores scoped to jenkins, select global and add credentials.
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/3a2be149-ff0a-4198-8b30-01ac851eca7f)
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/808adcd7-c262-4302-9225-ae07a67e9844)
+
+
+Select Username with password
+
+Username: Github username
+
+Password: Token generated from github ( Settings --> Develpers settings --> Personal access token --> Token (classic) --> Generate new token )
+
+ID and description: github
+
+Then click create
+
+
+
+
+
