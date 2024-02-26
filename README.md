@@ -1,5 +1,5 @@
 # DevOps-Project-with-Jenkins-Maven-SonaQube-Docker-and-EKS
-This is a simple ci cd project that deploys to kubernetes using jenkins
+This is a simple CICD project that deploys to kubernetes using jenkins
 
 ## Here is the project work flow of how I will build the app
 
@@ -7,9 +7,9 @@ This is a simple ci cd project that deploys to kubernetes using jenkins
 
 # Steps to Follow
 
-## Step 1: Launch an Ubuntu 22.04 t2 micro instance and name is Jenkins-Master
+## Step 1: Launch an Ubuntu 22.04 t2 large instance 
 
-![Screenshot 2024-02-22 150421](https://github.com/mariamo23/Register-app/assets/124802455/4e493911-f2b5-4214-ba5d-5f6e9b56f523)
+![Screenshot 2024-02-26 150639](https://github.com/mariamo23/Register-app/assets/124802455/d9201b73-377b-4b60-a4c9-c71c224d25f0)
 
 
 ## Step 2: Go to your Security Group and open Inbound Port 8080, since Jenkins works on Port 8080
@@ -54,30 +54,41 @@ sudo chmod 777 Jenkins.sh # this will give Jenkins.sh executable permission
 ./Jenkins.sh    # this will installl java and jenkins
 ```
 
-## Step 4 Launch an Ubuntu 22.04 t2 micro instance and name is Jenkins-Agent
+## Step 4:
 
-![Screenshot 2024-02-22 154531](https://github.com/mariamo23/Register-app/assets/124802455/4d3a0100-3c27-4ab6-b108-078f5f3f9769)
+Copy the public IP address and open on the browser using port 8080.
 
-## Step 5: Connect to your console and install Java
+![Screenshot 2024-02-26 151357](https://github.com/mariamo23/Register-app/assets/124802455/572231bf-053e-48d5-be43-f685f60132ce)
 
-```
-sudo apt update
-sudo vi /etc/hostname  # change hostname
-sudo init 6 # reboot the system
-```
-### Install Java
+Grab the password using below command
 
 ```
-sudo apt install fontconfig openjdk-17-jre -y # install Java 17
-java -version  # check Java version
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+![Screenshot 2024-02-26 151440](https://github.com/mariamo23/Register-app/assets/124802455/8c8c2459-15eb-4f11-aa44-4eaa61c11f55)
+
+Install suggested plugins
+
+![Screenshot 2024-02-26 151601](https://github.com/mariamo23/Register-app/assets/124802455/60e0f24e-997f-4fe2-abdf-a4b6ba9d7ade)
+
+Create a user and then save and continue
+
+## Step 5: Install Docker on the server
+
+```
+vi Docker.sh
 ```
 
-## Step 6: Install Docker on Jenkins-Agent
-
 ```
+sudo apt-get update
 sudo apt-get install docker.io -y
-sudo usermod -aG docker $USER
-sudo init 6
+sudo usermod -aG docker $USER   #my case is ubuntu
+newgrp docker
+sudo chmod 777 /var/run/docker.sock
+```
+```
+sudo chmod 777 Docker.sh # this will give Docker.sh executable permission
+./Docker.sh    
 ```
 
 ## Step 7: Edit ssh config file on both Jenkins Master and Agent
