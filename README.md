@@ -254,7 +254,7 @@ Create
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/e36d6c2d-e893-4e1d-b60b-1321e94182ee)
 
-
+Go to your pipeline script and define the variable
 
 
 
