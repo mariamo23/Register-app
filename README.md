@@ -93,7 +93,14 @@ sudo chmod 777 Docker.sh # this will give Docker.sh executable permission
 
 ## Step 6: Install plugins like Maven, JDK
 
-Go to Manage Jenkins, plugins, available plugins. Select Maven integration, Pipleline maven integration and Eclipse Temurin Installer Plugin to install JDK.
+Go to Manage Jenkins, plugins, available plugins and ...
+
+Install below plugins:
+
+1. Maven integration
+2. Pipleline maven integration
+3. Eclipse Temurin Installer
+4. SonarQube Scanner
 
 ![Screenshot 2024-02-26 162615](https://github.com/mariamo23/Register-app/assets/124802455/7c153e41-fb45-4c57-995e-6c654ebeb14f)
 ![Screenshot 2024-02-26 162926](https://github.com/mariamo23/Register-app/assets/124802455/98739ed1-5692-4e22-af1c-f421140fdf5a)
@@ -141,9 +148,15 @@ Enter username: admin and password: admin, click on login and change password
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/7c3b84f6-8362-4a61-a507-f3b9303ac5ea)
 
+Click on Administration --> Security --> Users --> Click on the 3 dashes under Tokens and Update Token --> Give it a name --> and click on Generate Token
 
+![image](https://github.com/mariamo23/Register-app/assets/124802455/3379e4b5-5031-478f-b828-a2ff12b7684f)
 
+![image](https://github.com/mariamo23/Register-app/assets/124802455/48a905ae-4e87-4be0-bf7d-86d146c7ece2)
 
+![image](https://github.com/mariamo23/Register-app/assets/124802455/3f901209-f4cd-43eb-928f-a0ece44340be)
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/cb128dd4-a821-4243-baf7-51db888e19a0)
 
 
 
