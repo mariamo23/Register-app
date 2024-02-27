@@ -205,6 +205,27 @@ Name: SonarQube Scanner
 
 Select install authomatically and then apply and save
 
+**7F:** Add quality gate 
+
+On Sonarqube dashboard, go to Administration --> configuration --> webhooks
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/247e85d0-f039-452a-9548-79b9b75f85c0)
+
+click create
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/e9e9da98-1581-4844-ba66-ee5fea0f8bca)
+
+Name: Anything
+
+under the URL section: http://jenkins-public-ip:8080/sonarqube-webhook/
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/46a28803-d71a-4c18-b7d3-3576837ccb32)
+
+then click create
+
+
+
+
 
 
 
