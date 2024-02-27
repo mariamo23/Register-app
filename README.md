@@ -122,7 +122,7 @@ Add github credentials to Jenkins. Go to Manage Jenkins --> Credentials --> unde
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/808adcd7-c262-4302-9225-ae07a67e9844)
 
 
-Select Username with password
+Kind is Username with password
 
 Username: Github username
 
@@ -158,6 +158,17 @@ Click on Administration --> Security --> Users --> Click on the 3 dashes under T
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/cb128dd4-a821-4243-baf7-51db888e19a0)
 
+copy Token and goto Jenkins Dashboard --> Manage Jenkins --> Credentials --> add credentials.
 
+![image](https://github.com/mariamo23/Register-app/assets/124802455/2387f03a-c592-4c20-ac74-dcf9a1fc8fc5)
 
+Kind is Secret Text
+
+Secret: Sonarqube token
+
+ID and Description: Sonarqube 
+
+Click on create
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/9e9fabfa-a96a-43cf-9218-d8c9074458cc)
 
