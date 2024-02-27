@@ -131,7 +131,7 @@ ID and description: github
 
 Then click create
 
-## Step 7: Create a sonarqube container (Remember to add 9000 ports in the security group).
+## Step 8: Create a sonarqube container (Remember to add 9000 ports in the security group).
 
 '''
 docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
@@ -141,13 +141,13 @@ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/84394744-ea08-4cbc-a074-ab8b08ab0440)
 
-**7A:** Enter username: admin and password: admin, click on login and change password
+**8A:** Enter username: admin and password: admin, click on login and change password
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/25196ad5-f29a-4edb-9331-04c3e1659300)
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/7c3b84f6-8362-4a61-a507-f3b9303ac5ea)
 
-**7B:** Click on Administration --> Security --> Users --> Click on the 3 dashes under Tokens and Update Token --> Give it a name --> and click on Generate Token
+**8B:** Click on Administration --> Security --> Users --> Click on the 3 dashes under Tokens and Update Token --> Give it a name --> and click on Generate Token
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/3379e4b5-5031-478f-b828-a2ff12b7684f)
 
@@ -157,7 +157,7 @@ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/cb128dd4-a821-4243-baf7-51db888e19a0)
 
-**7C:** Copy Token and goto Jenkins Dashboard --> Manage Jenkins --> Credentials --> add credentials.
+**8C:** Copy Token and goto Jenkins Dashboard --> Manage Jenkins --> Credentials --> add credentials.
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/2387f03a-c592-4c20-ac74-dcf9a1fc8fc5)
 
@@ -171,7 +171,7 @@ Click on create
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/9e9fabfa-a96a-43cf-9218-d8c9074458cc)
 
-**7D:** Go to Manage Jenkins --> plugins --> available plugins and ...
+**8D:** Go to Manage Jenkins --> plugins --> available plugins and ...
 
 Install below plugins:
 
@@ -179,7 +179,7 @@ Install below plugins:
 2. Sonar Quality Gates
 3. Quality Gates
 
-**7E:** Add SonarQube server to Jenkins
+**8E:** Add SonarQube server to Jenkins
 
 Go to Manage Jenkins --> System --> search for SonarQube Servers
 
@@ -205,7 +205,7 @@ Name: SonarQube Scanner
 
 Select install authomatically and then apply and save
 
-**7F:** Add quality gate 
+**8F:** Add quality gate 
 
 On Sonarqube dashboard, go to Administration --> configuration --> webhooks
 
@@ -217,12 +217,42 @@ click create
 
 Name: Anything
 
-under the URL section: http://jenkins-public-ip:8080/sonarqube-webhook/
+under the URL section: 
+
+``` 
+http://jenkins-public-ip:8080/sonarqube-webhook/
+```
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/46a28803-d71a-4c18-b7d3-3576837ccb32)
 
 then click create
 
+## Step 9: Docker Integration with Jenkins
+
+Go to Manage Jenkins --> plugins --> available plugins and ...
+
+Install below plugins:
+
+1. Docker
+2. Docker Commons
+3. Docker Pipeline
+4. Docker API
+5. Docker build step
+6. CloudBees DOcker build and publish
+
+Go to Manage Jenkins --> Credentials --> System --> add credentials
+
+Kind: username with password
+
+Username: Docker username
+
+Password: Docker token ( my account --> security --> new access token)
+
+Create
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/f67e808e-6e7c-4aca-aac3-9a41995f0f1c)
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/e36d6c2d-e893-4e1d-b60b-1321e94182ee)
 
 
 
