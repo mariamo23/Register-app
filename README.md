@@ -100,7 +100,6 @@ Install below plugins:
 1. Maven integration
 2. Pipleline maven integration
 3. Eclipse Temurin Installer
-4. SonarQube Scanner
 
 ![Screenshot 2024-02-26 162615](https://github.com/mariamo23/Register-app/assets/124802455/7c153e41-fb45-4c57-995e-6c654ebeb14f)
 ![Screenshot 2024-02-26 162926](https://github.com/mariamo23/Register-app/assets/124802455/98739ed1-5692-4e22-af1c-f421140fdf5a)
@@ -142,13 +141,13 @@ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/84394744-ea08-4cbc-a074-ab8b08ab0440)
 
-Enter username: admin and password: admin, click on login and change password
+**7A:** Enter username: admin and password: admin, click on login and change password
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/25196ad5-f29a-4edb-9331-04c3e1659300)
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/7c3b84f6-8362-4a61-a507-f3b9303ac5ea)
 
-Click on Administration --> Security --> Users --> Click on the 3 dashes under Tokens and Update Token --> Give it a name --> and click on Generate Token
+**7B:** Click on Administration --> Security --> Users --> Click on the 3 dashes under Tokens and Update Token --> Give it a name --> and click on Generate Token
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/3379e4b5-5031-478f-b828-a2ff12b7684f)
 
@@ -158,7 +157,7 @@ Click on Administration --> Security --> Users --> Click on the 3 dashes under T
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/cb128dd4-a821-4243-baf7-51db888e19a0)
 
-copy Token and goto Jenkins Dashboard --> Manage Jenkins --> Credentials --> add credentials.
+**7C:** Copy Token and goto Jenkins Dashboard --> Manage Jenkins --> Credentials --> add credentials.
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/2387f03a-c592-4c20-ac74-dcf9a1fc8fc5)
 
@@ -171,4 +170,41 @@ ID and Description: Sonarqube
 Click on create
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/9e9fabfa-a96a-43cf-9218-d8c9074458cc)
+
+**7D:** Go to Manage Jenkins --> plugins --> available plugins and ...
+
+Install below plugins:
+
+1. SonarQube Scanner
+2. Sonar Quality Gates
+3. Quality Gates
+
+**7E:** Add SonarQube server to Jenkins
+
+Go to Manage Jenkins --> System --> search for SonarQube Servers
+
+Click on Add SonarQube
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/b3b3b8d8-c3c5-42fe-85ac-c59b15cdb76d)
+
+Server URL: Sonarqube server url
+
+Server authentication token: the saved secret token
+
+Apply and save
+
+Go to Manage Jenkins --> tools --> search for SonarQube Scanner installations
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/94bb6d79-bc9f-47a2-83fc-81e179603c1f)
+
+Select add SonarQube scanner
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/56ff512d-f2e7-496a-ba97-3430dd27e24c)
+
+Name: SonarQube Scanner
+
+Select install authomatically and then apply and save
+
+
+
 
