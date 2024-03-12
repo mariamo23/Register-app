@@ -131,6 +131,63 @@ ID and description: github
 
 Then click create
 
+**7b:** Here, we build our CI job
+
+Go to Dashboard --> New item --> ( enter the name of your project) --> select pipeline --> ok
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/dcb6c49b-6959-4bd9-a480-7059d4ca8f18)
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/e564a9e5-04fd-4ba5-bfe2-9ca75bf328d0)
+
+Scroll all the way to the end and paste below script in the pipeline and save.
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/11fcf402-8af3-4fb3-b6f2-d5cd460bff86)
+
+
+```
+
+pipeline{
+    agent any
+    tools {
+        jdk 'Java'
+        maven 'Maven'
+    }
+    
+    stages{
+        stage("cleanup workspace"){
+            steps{
+                cleanWs()
+            }
+        }
+        stage("checkout from scm"){
+            steps{
+                git branch: 'main', credentialsId: 'GitHub_cred', url: 'https://github.com/mariamo23/register-appl.git'
+        }
+       
+        }
+
+        stage("build application"){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage("first test"){
+            steps{
+                sh 'mvn test'
+            }
+        } 
+    }
+}
+
+```
+
+Then build now. You should get a success.
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/b7a61838-fd11-46c3-983e-a49f79f6f828)
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/379096ec-4fac-4b7b-bed5-13ddbba02f78)
+
+
 ## Step 8: Create a sonarqube container (Remember to add 9000 ports in the security group).
 
 ```
@@ -205,7 +262,7 @@ Name: SonarQube Scanner
 
 Select install authomatically and then apply and save
 
-**8F:** Add quality gate 
+**8F:** Add quality gate by creating sonarqube webhook
 
 On Sonarqube dashboard, go to Administration --> configuration --> webhooks
 
@@ -250,11 +307,185 @@ Password: Docker token ( my account --> security --> new access token)
 
 Create
 
+![image](https://github.com/mariamo23/Register-app/assets/124802455/d3cd1954-f350-45b7-8140-748921cc4c9d)
+
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/f67e808e-6e7c-4aca-aac3-9a41995f0f1c)
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/e36d6c2d-e893-4e1d-b60b-1321e94182ee)
 
-Go to your pipeline script and define the variable
+Then we do code qualkity check
+
+Go to your pipeline script and add below
+
+```
+
+pipeline{
+    agent any
+    tools {
+        jdk 'Java'
+        maven 'Maven'
+    }
+    stages{
+        stage("cleanup workspace"){
+            steps{
+                cleanWs()
+            }
+        }
+        stage("checkout from scm"){
+            steps{
+                git branch: 'main', credentialsId: 'GitHub_cred', url: 'https://github.com/mariamo23/register-appl.git'
+        }
+       
+        }
+
+        stage("build application"){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage("first test"){
+            steps{
+                sh 'mvn test'
+            }
+        } 
+        stage ("Sonarqube Analysis"){
+            steps{
+                script{
+                    withSonarQubeEnv(credentialsId: 'Sonar-cred') {
+                        sh 'mvn sonar:sonar'
+                    }
+                }
+            }
+        }
+        stage ("Quality Gate"){
+            steps{
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonarqube'
+                }
+            }
+        }
+    }
+}
+
+```
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/25b4393d-7030-41da-bdfb-76d02fedd7e2)
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/0fb04de9-1038-45ce-a10d-5f9778901083)
+
+
+Next will be to add environmental variable to help us login, build and push to docker hub.
+
+Copy below script and add to your pipeline
+
+```
+
+pipeline{
+    agent any
+    tools {
+        jdk 'Java'
+        maven 'Maven'
+    }
+    environment {
+            DOCKER_PASS = credentials ('docker_cred')
+            }
+    stages{
+        stage("cleanup workspace"){
+            steps{
+                cleanWs()
+            }
+        }
+        stage("checkout from scm"){
+            steps{
+                git branch: 'main', credentialsId: 'GitHub_cred', url: 'https://github.com/mariamo23/register-appl.git'
+        }
+       
+        }
+
+        stage("build application"){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage("first test"){
+            steps{
+                sh 'mvn test'
+            }
+        } 
+        stage ("Sonarqube Analysis"){
+            steps{
+                script{
+                    withSonarQubeEnv(credentialsId: 'Sonar-cred') {
+                        sh 'mvn sonar:sonar'
+                    }
+                }
+            }
+        }
+        stage ("Quality Gate"){
+            steps{
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonarqube'
+                }
+            }
+        }
+
+        stage('Login to Dockerhub') {
+            steps {
+                script {
+                    sh "echo $DOCKER_PASS_PSW | docker login -u $DOCKER_PASS_USR --password-stdin"
+                    
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                script {
+                    sh 'docker build -t mariamo23/registeration_app:latest .'
+                    
+                }
+            }
+        }
+        stage('Docker Push') {
+            steps {
+                script {
+                    sh 'docker push mariamo23/registeration_app:latest'
+                }
+            }
+        }        
+
+    }
+}
+
+```
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/4e27a0ff-783f-4d6e-9071-d594e90e5d60)
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/49674693-9649-49ba-95d1-e4e21a7ac1b8)
+
+Next is to install and integrate Trivy scan to scan our docker hub image
+
+```
+vi Trivy.sh
+
+```
+
+copy below script
+
+```
+sudo apt-get install wget apt-transport-https gnupg lsb-release
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+sudo apt-get update
+sudo apt-get install trivy
+
+```
+
+```
+
+chmod 777 Trivy.sh
+./Trivy.sh
+
+```
 
 
 
