@@ -487,6 +487,20 @@ chmod 777 Trivy.sh
 
 ```
 
+Now copy below to your pipeline and build now
+
+```
+
+stage('Trivy image Scan') {
+            steps {
+                
+                    sh 'trivy image mariamo23/registeration_app:latest > trivy_result.txt'  
+                
+            }
+        }    
+```
+
+![image](https://github.com/mariamo23/Register-app/assets/124802455/0e1251e6-e741-4d18-8801-927cfe51cadb)
 
 
 
