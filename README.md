@@ -133,9 +133,9 @@ Then click create
 
 ## Step 8: Create a sonarqube container (Remember to add 9000 ports in the security group).
 
-'''
+```
 docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
-'''
+```
 
 ![image](https://github.com/mariamo23/Register-app/assets/124802455/4ead278a-03cb-4557-8bcc-7df3f32f5b21)
 
